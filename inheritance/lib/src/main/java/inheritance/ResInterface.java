@@ -1,5 +1,6 @@
 package inheritance;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public interface ResInterface  {
@@ -8,7 +9,7 @@ public interface ResInterface  {
     String getCatego();
 
     double getStar();
-    LinkedList<Review> getReviews();
+    ArrayList<Review> getReviews();
     void addReview(Review review);
     void updateStar();
 

@@ -29,7 +29,7 @@ public class Library {
                  System.out.println(cityMall);
 
         Theater movie = new Theater("Amara");
-//        Theater movie2 = new Theater("toto");
+          Theater movie2 = new Theater("toto");
         movie.addMovie("toto");
         movie.addMovie("bobo");
         System.out.println(movie.getMovies());
@@ -43,8 +43,9 @@ public class Library {
         movie.addNewRev(inqury,"toto");
         movie.removeMovie("bobo");
         movie.addNewRev(inqury,"bobo");
-        System.out.println(movie);
+//        System.out.println(movie);
         System.out.println(movie.getReviews());
     }
+
 
 }

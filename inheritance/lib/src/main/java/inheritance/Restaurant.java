@@ -8,7 +8,7 @@ public class Restaurant implements ResInterface{
     private String name;
     private double stars;
     private String priceCatego;
-    private LinkedList<Review> reviews = new LinkedList<>();
+    private List<Review> review = new ArrayList<>();
 
     public Restaurant(String name,double stars, String priceCatego) {
         this.name = name;
@@ -32,13 +32,17 @@ public class Restaurant implements ResInterface{
     }
 
     @Override
-    public LinkedList<Review> getReviews() {
-        return this.reviews;
+    public ArrayList<Review> getReviews() {
+        return (ArrayList<Review>) review;
     }
+
+//    public List<Review> getReview() {
+//        return review;
+//    }
 
     @Override
     public void addReview(Review review) {
-        this.reviews.add(review);
+        this.review.add(review);
         updateStar();
     }
 

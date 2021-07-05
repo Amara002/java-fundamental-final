@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Theater implements TheaterInterface{
     private String name;
-    private LinkedList<String> movies = new LinkedList<>();
+    private List<String> movies = new ArrayList<>();
     private Map<String , Review> reviews = new HashMap<>();
 
     public Map<String, Review> getReviews() {
@@ -23,6 +23,7 @@ public class Theater implements TheaterInterface{
     @Override
     public Review addNewRev(String body, String author, int stars) {
         Review newReview = new Review(body, author, stars);
+        this.reviews.put("",newReview);
         return newReview;
     }
     public void addNewRev(Review rev, String movieName) {
@@ -46,7 +47,7 @@ public class Theater implements TheaterInterface{
     public void addMovie(String movieTitle) {
         this.movies.add(movieTitle);
     }
-    public LinkedList<String> getMovies() {
+    public List<String> getMovies() {
         return this.movies;
     }
     public void removeMovie(String movieTitle) {
