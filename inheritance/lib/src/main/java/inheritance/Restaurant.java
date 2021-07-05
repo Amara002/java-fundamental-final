@@ -3,7 +3,7 @@ package inheritance;
 import java.io.Serializable;
 import java.util.*;
 
-public class Restaurant implements ResInterface, Serializable {
+public class Restaurant implements ResInterface{
 
     private String name;
     private double stars;
