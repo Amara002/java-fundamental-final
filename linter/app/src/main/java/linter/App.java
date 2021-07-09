@@ -7,31 +7,57 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
-    public static void readingFile(FileReader path) throws IOException {
-        BufferedReader reader = new BufferedReader(path);
+    public static String linterMessage (String path) throws IOException {
+        Scanner scanner = null;
+        String response = "";
+        int lineNumber = 1;
         try {
-            int count = 0;
-            while (reader.readLine() != null) {
-                if ((!reader.readLine().endsWith(";")) && (!reader.readLine().endsWith("{")) &&
-                        (!reader.readLine().endsWith("}")) && (!reader.readLine().contains("if")) &&
-                        (!reader.readLine().contains("else"))) {
-                    System.out.println("Missing Semicolon at Line: " + ++count);
-                }
+            scanner = new Scanner(new BufferedReader(new FileReader(path)));
+            String lines;
+            while (scanner.hasNextLine()) {
+                lines = scanner.nextLine();
+                response += errorChecker(lines, lineNumber);
+                lineNumber++;
             }
         } catch (FileNotFoundException e) {
             System.out.println("The file was not found");
+        } finally {
+            if (scanner != null) {
+                scanner.close();
+            }
         }
-
+        if (response.equals("")) return "The file has no error";
+        else return response;
     }
-    public static void main(String[] args) throws IOException {
-        FileReader filePath = new FileReader("src/main/resources/gates.js");
-        readingFile(filePath);
+    private static String errorChecker(String line, int lineNumber) {
+        char openCurly = '{';
+        char closeCurly = '}';
+        char semi = ';';
+        char last = ' ';
+        boolean ifCheck = line.contains("if");
+        boolean elseCheck = line.contains("else");
+        StringBuilder response = new StringBuilder();
+        if (line.length() != 0) {
+            last = line.charAt(line.length() - 1);
+        }
+        if (!ifCheck && !elseCheck && last != openCurly && last != closeCurly && line.length() != 0) {
+            if (last != semi) {
+                response.append("Line ").append(lineNumber).append(": Missing semicolon").append("\n");
+            }
+        }
+        return response.toString();
     }
-
+    public static void main(String[] args) throws IOException{
+        Path path = Paths.get("C:\\Users\\LTUC\\Desktop\\401asac\\java-fundamental-final\\linter\\app\\src\\main\\resources\\gates.js");
+        new App().linterMessage(path.toString());
+        System.out.println(linterMessage(path.toString()));
+    }
 }

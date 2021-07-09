@@ -4,6 +4,10 @@
 package linter;
 
 import org.junit.Test;
+
+import java.io.IOException;
+
+import static linter.App.linterMessage;
 import static org.junit.Assert.*;
 
 public class AppTest {
@@ -11,4 +15,70 @@ public class AppTest {
         App classUnderTest = new App();
         assertNotNull("app should have a greeting", classUnderTest.getGreeting());
     }
+    @Test
+    public void testLinterMessage_GatesJS() throws IOException {
+        String expected = "Line 3: Missing semicolon\n" +
+                "Line 5: Missing semicolon\n" +
+                "Line 10: Missing semicolon\n" +
+                "Line 12: Missing semicolon\n" +
+                "Line 14: Missing semicolon\n" +
+                "Line 23: Missing semicolon\n" +
+                "Line 25: Missing semicolon\n" +
+                "Line 28: Missing semicolon\n" +
+                "Line 31: Missing semicolon\n" +
+                "Line 34: Missing semicolon\n" +
+                "Line 35: Missing semicolon\n" +
+                "Line 42: Missing semicolon\n" +
+                "Line 43: Missing semicolon\n" +
+                "Line 48: Missing semicolon\n" +
+                "Line 49: Missing semicolon\n" +
+                "Line 50: Missing semicolon\n" +
+                "Line 51: Missing semicolon\n" +
+                "Line 53: Missing semicolon\n" +
+                "Line 56: Missing semicolon\n" +
+                "Line 57: Missing semicolon\n" +
+                "Line 58: Missing semicolon\n" +
+                "Line 59: Missing semicolon\n" +
+                "Line 60: Missing semicolon\n" +
+                "Line 61: Missing semicolon\n" +
+                "Line 62: Missing semicolon\n" +
+                "Line 63: Missing semicolon\n" +
+                "Line 64: Missing semicolon\n" +
+                "Line 65: Missing semicolon\n" +
+                "Line 66: Missing semicolon\n" +
+                "Line 67: Missing semicolon\n" +
+                "Line 68: Missing semicolon\n" +
+                "Line 69: Missing semicolon\n" +
+                "Line 70: Missing semicolon\n" +
+                "Line 71: Missing semicolon\n" +
+                "Line 72: Missing semicolon\n" +
+                "Line 73: Missing semicolon\n" +
+                "Line 74: Missing semicolon\n" +
+                "Line 75: Missing semicolon\n" +
+                "Line 76: Missing semicolon\n" +
+                "Line 77: Missing semicolon\n" +
+                "Line 78: Missing semicolon\n" +
+                "Line 79: Missing semicolon\n" +
+                "Line 80: Missing semicolon\n" +
+                "Line 81: Missing semicolon\n" +
+                "Line 82: Missing semicolon\n" +
+                "Line 83: Missing semicolon\n"
+                ;
+        String response = linterMessage("C:\\Users\\LTUC\\Desktop\\401asac\\java-fundamental-final\\linter\\app\\src\\main\\resources\\gates.js");
+        assertEquals("GatesJS: Incorrect error message", expected, response);
+    }
+
+    @Test
+    public void testEmptyFile() throws IOException {
+        String expected = "The file has no error";
+        String response = App.linterMessage("C:\\Users\\LTUC\\Desktop\\401asac\\java-fundamental-final\\linter\\app\\src\\main\\resources\\emptyFile.js");
+        assertEquals("The file is not empty",expected, response);
+    }
+    @Test
+    public void testNoErrorFile() throws IOException {
+        String expected = "The file has no error";
+        String response = App.linterMessage("C:\\Users\\LTUC\\Desktop\\401asac\\java-fundamental-final\\linter\\app\\src\\main\\resources\\no-errors.js");
+        assertEquals("The file has an error",expected, response);
+    }
+
 }
